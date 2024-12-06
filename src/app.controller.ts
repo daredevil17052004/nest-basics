@@ -12,6 +12,6 @@ export class AppController {
 
   @Get()
   getWelcomeMessage(): string{
-    return 'Welcome to the Task Management API!';
+    return 'Welcome to the Task Management ';
   }
 }
