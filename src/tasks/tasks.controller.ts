@@ -3,15 +3,18 @@ import { TasksService } from './tasks.service';
 import { ValidationPipe } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { TaskTitleUppercasePipe } from './pipes/task-title-uppercase.pipe';
+import { UseGuards } from '@nestjs/common';
+import { AuthGuard } from 'src/common/guard/auth.guard';
 
 @Controller('tasks')
 export class TasksController {
 
     constructor(private taskService: TasksService){}
 
+    @UseGuards(AuthGuard)
     @Get()
     getAllTasks(){
-        return this.taskService.getAllTask();
+        return this.taskService.getAllTasks();
     }
 
     @Post()

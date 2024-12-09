@@ -1,13 +1,17 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { TasksController } from './tasks/tasks.controller';
-import { TasksService } from './tasks/tasks.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { TasksModule } from './tasks/tasks.module';
 
 @Module({
-  imports: [TasksModule],
-  controllers: [AppController, TasksController],
-  providers: [AppService, TasksService],
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'mongodb',
+      url: 'mongodb+srv://ansh:ansh@cluster0.7bjbvtq.mongodb.net/nest',
+      synchronize: true,
+      useUnifiedTopology: true,
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+    }),
+    TasksModule,
+  ],
 })
 export class AppModule {}
